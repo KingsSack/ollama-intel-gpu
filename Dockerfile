@@ -68,4 +68,10 @@ EXPOSE 11434
 
 COPY ./start-ollama.sh /start-ollama.sh
 
-ENTRYPOINT [ "/start-ollama.sh" ]
+RUN chmod +x /start-ollama.sh
+
+ENV DEVICE=Arc
+
+RUN source ipex-llm-init --gpu --device $DEVICE
+
+ENTRYPOINT [ "./start-ollama.sh" ]
