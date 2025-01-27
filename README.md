@@ -1,2 +1,3 @@
-## Run Ollama with an Intel ARC GPU
+# Run Ollama with an Intel ARC GPU
 
+hello
