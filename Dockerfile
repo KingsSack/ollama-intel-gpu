@@ -72,6 +72,6 @@ RUN chmod +x /start-ollama.sh
 
 ENV DEVICE=Arc
 
-RUN source ipex-llm-init --gpu --device $DEVICE
+RUN . ipex-llm-init --gpu --device $DEVICE
 
 ENTRYPOINT [ "./start-ollama.sh" ]
