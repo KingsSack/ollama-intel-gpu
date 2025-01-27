@@ -64,8 +64,6 @@ RUN wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRO
     rm -rf /root/.cache/Cypress && \
     pip uninstall -y gunicorn python-jose PyMySQL
 
-EXPOSE 11434
-
 COPY ./start-ollama.sh /start-ollama.sh
 
 RUN chmod +x /start-ollama.sh
@@ -73,5 +71,8 @@ RUN chmod +x /start-ollama.sh
 ENV DEVICE=Arc
 
 RUN bash -c "source ipex-llm-init --gpu --device $DEVICE"
+
+EXPOSE 11434
+ENV OLLAMA_HOST 0.0.0.0
 
 ENTRYPOINT [ "./start-ollama.sh" ]
