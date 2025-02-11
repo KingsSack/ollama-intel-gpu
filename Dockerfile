@@ -9,6 +9,11 @@ ENV PYTHONUNBUFFERED=1
 # When cache is enabled SYCL runtime will try to cache and reuse JIT-compiled binaries. 
 ENV SYCL_CACHE_PERSISTENT=1
 
+ENV OLLAMA_NUM_GPU=999
+ENV ZES_ENABLE_SYSMAN=1
+ENV SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS=1
+ENV ONEAPI_DEVICE_SELECTOR=level_zero:0
+
 # Disable pip's cache behavior
 ARG PIP_NO_CACHE_DIR=false
 
