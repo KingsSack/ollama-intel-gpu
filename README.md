@@ -1,3 +1,5 @@
 # Run Ollama with an Intel ARC GPU
 
-hello
+Host ollama in a docker container while utilizing an Intel ARC GPU.
+
+Based on intel's IPEX-LLM
