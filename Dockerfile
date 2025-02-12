@@ -1,6 +1,4 @@
-FROM intelanalytics/ipex-llm-inference-cpp-xpu:latest
-
-ENV DEVICE=Arc
+FROM intelanalytics/ipex-llm-inference-cpp-xpu:2.2.0-SNAPSHOT
 
 EXPOSE 11434
 ENV OLLAMA_HOST=0.0.0.0
