@@ -7,7 +7,8 @@ ENV OLLAMA_HOST 0.0.0.0
 ENV ZES_ENABLE_SYSMAN=1
 ENV OLLAMA_NUM_GPU=999
 
-RUN mkdir -p /llm/ollama; \
+RUN source ipex-llm-init --gpu --device $DEVICE \
+    mkdir -p /llm/ollama; \
     cd /llm/ollama; \
     init-ollama;
 
