@@ -65,8 +65,7 @@ RUN wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRO
     pip uninstall -y gunicorn python-jose PyMySQL
 
 COPY ./start-ollama.sh /llm/scripts/start-ollama.sh
-
-# RUN chmod +x /llm/scripts/start-ollama.sh
+RUN chmod +x /llm/scripts/start-ollama.sh
 
 ENV DEVICE=Arc
 
