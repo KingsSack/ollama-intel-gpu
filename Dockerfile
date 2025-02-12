@@ -9,11 +9,6 @@ ENV PYTHONUNBUFFERED=1
 # When cache is enabled SYCL runtime will try to cache and reuse JIT-compiled binaries. 
 ENV SYCL_CACHE_PERSISTENT=1
 
-ENV OLLAMA_NUM_GPU=999
-ENV ZES_ENABLE_SYSMAN=1
-ENV SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS=1
-ENV ONEAPI_DEVICE_SELECTOR=level_zero:0
-
 # Disable pip's cache behavior
 ARG PIP_NO_CACHE_DIR=false
 
@@ -69,7 +64,7 @@ RUN wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRO
     rm -rf /root/.cache/Cypress && \
     pip uninstall -y gunicorn python-jose PyMySQL
 
-COPY ./start-ollama.sh /start-ollama.sh
+COPY ./start-ollama.sh /llm/scripts/start-ollama.sh
 
 RUN chmod +x /start-ollama.sh
 
@@ -79,5 +74,11 @@ RUN bash -c "source ipex-llm-init --gpu --device $DEVICE"
 
 EXPOSE 11434
 ENV OLLAMA_HOST 0.0.0.0
+ENV OLLAMA_NUM_GPU=999
+ENV ZES_ENABLE_SYSMAN=1
+ENV SYCL_PI_LEVEL_ZERO_USE_IMMEDIATE_COMMANDLISTS=1
+ENV ONEAPI_DEVICE_SELECTOR=level_zero:0
 
-ENTRYPOINT [ "./start-ollama.sh" ]
+WORKDIR /llm/
+
+ENTRYPOINT [ "/llm/scripts/start-ollama.sh" ]
