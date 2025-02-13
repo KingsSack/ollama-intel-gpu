@@ -10,6 +10,8 @@ RUN apt-get update && \
         software-properties-common && \
     add-apt-repository ppa:deadsnakes/ppa -y && \
     apt-get install -y --no-install-recommends python3.11 python3-pip && \
+    rm /usr/bin/python3 && ln -s /usr/bin/python3.11 /usr/bin/python3 && \
+    ln -s /usr/bin/python3 /usr/bin/python && \
     # Install pip and IPEX
     wget https://bootstrap.pypa.io/get-pip.py -O get-pip.py && \
     python3 get-pip.py && rm get-pip.py && \
