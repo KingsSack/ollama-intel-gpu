@@ -16,19 +16,21 @@ RUN apt-get update && \
         python3.11 \
         python3.11-distutils \
         python3.11-venv && \
+    rm /usr/bin/python3 && \
+    ln -s /usr/bin/python3.11 /usr/bin/python3 && \
+    ln -s /usr/bin/python3 /usr/bin/python && \
     # Configure Python
-    rm -f /usr/bin/python3 && \
-    ln -sf /usr/bin/python3.11 /usr/bin/python3 && \
-    ln -sf /usr/bin/python3 /usr/bin/python && \
+    # rm -f /usr/bin/python3 && \
+    # ln -sf /usr/bin/python3.11 /usr/bin/python3 && \
+    # ln -sf /usr/bin/python3 /usr/bin/python && \
     # Install pip using get-pip.py
     wget -q https://bootstrap.pypa.io/get-pip.py && \
     python3.11 get-pip.py --break-system-packages && \
     rm get-pip.py && \
     # Install IPEX
-    pip install --pre --upgrade ipex-llm[cpp]
-
-# Download and install Ollama
-RUN mkdir -p /llm/ollama && \
+    pip install --pre --upgrade ipex-llm[cpp] && \
+    # Download and install Ollama
+    mkdir -p /llm/ollama && \
     cd /llm/ollama && \
     ollama-init
 
