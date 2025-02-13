@@ -12,6 +12,9 @@ RUN set -eux && \
         wget \
         software-properties-common \
         gpg-agent && \
+    # Set timezone
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
+    echo $TZ > /etc/timezone && \
     # Add deadsnakes PPA for Python 3.11
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
