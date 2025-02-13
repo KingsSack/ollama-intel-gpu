@@ -1,4 +1,4 @@
-FROM intel/oneapi-basekit:2025.0.1-0-devel-ubuntu24.04
+FROM intel/oneapi-basekit:2025.0.1-0-devel-ubuntu22.04
 
 ENV TZ=Asia/Shanghai \
     PYTHONUNBUFFERED=1 \
@@ -6,7 +6,8 @@ ENV TZ=Asia/Shanghai \
 ARG PIP_NO_CACHE_DIR=false
 
 # Install dependencies
-RUN apt-get update && \
+RUN set -eux && \
+    apt-get update && \
     apt-get install -y --no-install-recommends \
         wget \
         software-properties-common \
