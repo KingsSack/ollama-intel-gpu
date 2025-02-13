@@ -25,15 +25,16 @@ RUN apt-get update && \
     python3.11 get-pip.py --break-system-packages && \
     rm get-pip.py && \
     # Install IPEX
-    python3.11 -m pip install --no-cache-dir --break-system-packages --pre ipex-llm[cpp] && \
-    # Clean up
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    pip install --pre --upgrade ipex-llm[cpp]
 
 # Download and install Ollama
 RUN mkdir -p /llm/ollama && \
     cd /llm/ollama && \
     ollama-init
+
+# Clean up
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set environment variables
 ENV OLLAMA_NUM_GPU=999 \
