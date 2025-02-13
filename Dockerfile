@@ -2,11 +2,11 @@ FROM intel/oneapi-basekit:2025.0.1-0-devel-ubuntu24.04
 
 ENV TZ=Asia/Shanghai
 
-RUN apt-get update && apt-get install && \
+RUN apt-get update && \
+    apt-get install -y && \
     add-apt-repository ppa:deadsnakes/ppa && \
-    apt install python3.11 -y && \
-    apt install python3.11-venv -y && \
-    pip install --pre --upgrade ipex-llm[cpp] && \
+    apt-get install -y python3.11 python3.11-venv python3-pip && \
+    pip3 install --no-cache-dir --pre --upgrade ipex-llm[cpp] && \
     mkdir -p /llm/ollama && \
     cd /llm/ollama && \
     init-ollama
