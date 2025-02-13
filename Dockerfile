@@ -1,4 +1,4 @@
-FROM intel/oneapi-basekit:2025.0.1-0-devel-ubuntu22.04
+FROM intel/oneapi-basekit:2025.0.1-0-devel-ubuntu24.04
 
 ENV TZ=Asia/Shanghai \
     PYTHONUNBUFFERED=1 \
@@ -6,22 +6,18 @@ ENV TZ=Asia/Shanghai \
 ARG PIP_NO_CACHE_DIR=false
 
 # Install dependencies
-RUN set -eux && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends \
-        wget \
-        software-properties-common \
-        gpg-agent && \
+RUN apt-get update && \
     # Set timezone
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo $TZ > /etc/timezone && \
-    # Add deadsnakes PPA for Python 3.11
+    # Python for installing ipex-llm
     add-apt-repository ppa:deadsnakes/ppa && \
-    apt-get update && \
     apt-get install -y --no-install-recommends \
         python3.11 \
+        python3-pip \
+        python3.11-dev \
         python3.11-distutils \
-        python3.11-venv && \
+        python3-wheel && \
     rm /usr/bin/python3 && \
     ln -s /usr/bin/python3.11 /usr/bin/python3 && \
     ln -s /usr/bin/python3 /usr/bin/python && \
@@ -30,9 +26,10 @@ RUN set -eux && \
     python3.11 get-pip.py --break-system-packages && \
     rm get-pip.py && \
     # Install IPEX
-    pip install --pre --upgrade ipex-llm[cpp] && \
-    # Download and install Ollama
-    mkdir -p /llm/ollama && \
+    pip install --pre --upgrade ipex-llm[cpp]
+
+# Download and install Ollama
+RUN mkdir -p /llm/ollama && \
     cd /llm/ollama && \
     ollama-init
 
