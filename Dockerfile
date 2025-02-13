@@ -22,10 +22,10 @@ RUN apt-get update && \
     ln -s /usr/bin/python3.11 /usr/bin/python3 && \
     ln -s /usr/bin/python3 /usr/bin/python && \
     # Install pip using get-pip.py
-    wget -q https://bootstrap.pypa.io/get-pip.py && \
-    python3.11 get-pip.py --break-system-packages && \
+    wget https://bootstrap.pypa.io/get-pip.py -O get-pip.py && \
+    python3 get-pip.py && \
     rm get-pip.py && \
-    # Install IPEX
+    # Install ipex-llm
     pip install --pre --upgrade ipex-llm[cpp]
 
 # Download and install Ollama
