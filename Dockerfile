@@ -7,6 +7,8 @@ ARG PIP_NO_CACHE_DIR=false
 
 # Install dependencies
 RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      curl wget git sudo libunwind8-dev vim less gnupg gpg-agent software-properties-common && \
     # Set timezone
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo $TZ > /etc/timezone && \
