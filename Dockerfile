@@ -5,8 +5,9 @@ ENV TZ=Asia/Shanghai
 RUN apt-get update && \
     apt-get install -y && \
     add-apt-repository ppa:deadsnakes/ppa && \
-    apt-get install -y python3.11 python3.11-venv python3-pip && \
-    pip3 install --no-cache-dir --pre --upgrade ipex-llm[cpp] && \
+    apt-get install -y python3.11 python3.11-venv python3-ipex-llm[cpp] && \
+    # apt-get install -y python3.11 python3.11-venv python3-pip && \
+    # pip3 install --no-cache-dir --pre --upgrade ipex-llm[cpp] && \
     mkdir -p /llm/ollama && \
     cd /llm/ollama && \
     init-ollama
