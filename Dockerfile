@@ -25,8 +25,13 @@ RUN apt-get update && \
     wget https://bootstrap.pypa.io/get-pip.py -O get-pip.py && \
     python3 get-pip.py && \
     rm get-pip.py && \
-    # Install ipex-llm
+    # Use a virtual environment for ipex-llm
+    python3 -m venv /opt/venv && \
+    . /opt/venv/bin/activate && \
     pip install --pre --upgrade ipex-llm[cpp]
+
+# Ensure scripts use the virtual environment
+ENV PATH="/opt/venv/bin:$PATH"
 
 # Download and install Ollama
 RUN mkdir -p /llm/ollama && \
