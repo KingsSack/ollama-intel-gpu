@@ -33,8 +33,7 @@ RUN apt-get update && \
 # Download and install Ollama
 RUN mkdir -p /llm/ollama && \
     cd /llm/ollama && \
-    wget -q https://github.com/ollama/ollama/releases/latest/download/ollama-linux-amd64 -o ollama && \
-    chmod +x ollama
+    ollama-init
 
 # Set environment variables
 ENV OLLAMA_NUM_GPU=999 \
