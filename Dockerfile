@@ -5,8 +5,8 @@ ENV TZ=Asia/Shanghai \
     SYCL_CACHE_PERSISTENT=1
 ARG PIP_NO_CACHE_DIR=false
 
-# Install dependencies
-RUN apt-get update && \
+RUN set -eux && \
+    apt-get update && \
     # Set timezone
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo $TZ > /etc/timezone && \
@@ -26,10 +26,9 @@ RUN apt-get update && \
     python3 get-pip.py && \
     rm get-pip.py && \
     # Install ipex-llm
-    pip install --pre --upgrade ipex-llm[cpp]
-
-# Clean up
-RUN apt-get clean && \
+    pip install --pre --upgrade ipex-llm[cpp] && \
+    # Clean up
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # Set environment variables
