@@ -13,4 +13,4 @@ EXPOSE 11434
 
 WORKDIR /llm/ollama
 
-ENTRYPOINT ["/bin/bash", "-c", "source ipex-llm-init --gpu --device $DEVICE && mkdir -p /llm/ollama && cd /llm/ollama && ollama-init && ./ollama serve"]
+ENTRYPOINT ["/bin/bash", "-c", "cd /llm/scripts/ && source ipex-llm-init --gpu --device $DEVICE && bash start-ollama.sh && tail -f /llm/ollama/ollama.log"]
